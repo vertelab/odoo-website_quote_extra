@@ -11,5 +11,19 @@
                 </xpath>
             </field>
         </record>
+        
+        <record model="ir.ui.view" id="view_sale_quote_template_form_sequence">
+            <field name="name">sale.quote.template.form.sequence</field>
+            <field name="model">sale.quote.template</field>
+            <field name="inherit_id" ref="website_quote.view_sale_quote_template_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='quote_line']/tree/field[@name='product_id']" position="before">
+                    <field name="sequence" widget="handle"/>
+                </xpath>
+                <xpath expr="//field[@name='options']//field[@name='product_id']" position="before">
+                    <field name="sequence" widget="handle"/>
+                </xpath>
+            </field>
+        </record>
     </data>
 </openerp>

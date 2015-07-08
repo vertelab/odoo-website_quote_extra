@@ -23,5 +23,19 @@ from openerp import models, fields, api, _, tools
 
 class sale_order_option(models.Model):
     _inherit = "sale.order.option"
+    _order = 'sequence'
+
+    sequence = fields.Integer()
+
+
+class sale_quote_option(models.Model):
+    _inherit = "sale.quote.option"
+    _order = 'sequence'
+
+    sequence = fields.Integer()
+
+class sale_quote_line(models.Model):
+    _inherit = "sale.quote.line"
+    _order = 'sequence'
 
     sequence = fields.Integer()
