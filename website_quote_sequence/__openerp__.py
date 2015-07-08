@@ -21,7 +21,7 @@
 {
 'name': 'Online Proposals Sequence',
 'version': '0.1',
-'summary': 'Payment Acquirer: Payer.se Implementation',
+'summary': 'Adds sequence to the quotation lines of the Online Proposals module. Bla bla.',
 'category': 'website',
 'description': """Adds sequence to the quotation lines of the Online Proposals module.""",
 'author': 'Vertel AB',
