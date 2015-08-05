@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="desc" name="Module Description" >
+                  <t t-call="website.layout">
+                    <div id="wrap" class="oe_structure oe_empty">
+                      <a t-att-href="'/quote/%d#%s' % (sale_order.id,anchor or '')" class="btn btn-primary col-sm-3 col-md-1 col-lg-1 col-md-offset-5 col-lg-offset-5" t-if="sale_order">Back</a>
+                      <section class="mt16  mb0">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-12">
+                                <span t-field="module.description_html"/>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+                      <a t-att-href="'/quote/%d#%s' % (sale_order.id,anchor or '')" class="btn btn-primary col-sm-3 col-md-1 col-lg-1 col-md-offset-5 col-lg-offset-5" t-if="sale_order">Back</a>
+                    </div>
+                  </t>
+        </template>      
+        
+        
+        
+        <template id="opt_show_module_desc" name="Show link to module" customize_show="True" inherit_id="website_quote.so_quotation">
+            <xpath expr="//div[@t-field='line.website_description']" position="replace">
+                <div t-field="line.website_description"/>
+                <a t-att-href="'/quote/%s/module/%s/anchor/%s' % (quotation.id,line.product_id.product_tmpl_id.quote_module_id.name, line.id)" t-if="line.product_id.product_tmpl_id.quote_module_id" class="btn btn-primary col-sm-3 col-md-3 col-lg-3 col-md-offset-5 col-lg-offset-5">Show module description</a>
+
+          </xpath>
+        </template>
+
+        
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.common.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+                <field name="arch" type="xml">
+                    <field name="description" position="after">
+                        <label for="quote_module_id" cols="1" />
+                        <field name="quote_module_id" colspan="2"/>
+                    </field>
+                </field>
+        </record>
+
+
+
+
+
+    </data>
+</openerp>
