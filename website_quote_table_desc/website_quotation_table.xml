@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <openerp>
+        <data>
+            <template id="quotation_table" inherit_id="website_quote.pricing" name="Quotation Table">
+                <xpath expr="//thead/tr/th[3]" position="attributes">
+                    <attribute name="class">hidden</attribute>
+                </xpath>
+                
+                <xpath expr="//thead/tr/th[4]" position="attributes">
+                    <attribute name="class">hidden</attribute>
+                </xpath>
+                
+                <xpath expr="//tbody/tr/td[3]" position="attributes">
+                    <attribute name="class">hidden</attribute>
+                </xpath>
+                
+                <xpath expr="//tbody/tr/td[4]" position="attributes">
+                    <attribute name="class">hidden</attribute>
+                </xpath>
+                
+                <xpath expr="//tbody/tr/td[1]/div" position="attributes">
+                    <attribute name="style">font-weight: bold</attribute>
+                </xpath>
+                
+                <xpath expr="//section[@id='quote']/table/thead/tr/th[1]" position="before">
+                    <th></th>
+                </xpath>                
+                
+                <xpath expr="//tbody/tr/td[1]/div" position="after">
+                    <t t-set="p" t-value="request.env['product.product'].search([('product_tmpl_id', '=', line.product_id.id)])"/>
+                    <h5>
+                        <span t-field="p.description" t-field-options="{&quot;style&quot;:&quot;margin:auto&quot; }"/>  
+                    </h5> 
+                </xpath>
+                
+                <xpath expr="//tbody/tr/td[1]" position="before">
+                    <td>
+                        <t t-set="p" t-value="request.env['product.product'].search([('product_tmpl_id', '=', line.product_id.id)])"/>
+                        <span t-field="p.image_medium" t-field-options="{&quot;widget&quot;:&quot;image&quot;, &quot;class&quot;:&quot;img-responsive&quot;, &quot;style&quot;:&quot;margin:auto;max-height:100px; max-width:100px&quot;}"/>                            
+                    </td>
+                </xpath>
+            </template>
+        </data>
+    </openerp>
