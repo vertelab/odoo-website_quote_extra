@@ -72,7 +72,7 @@ class sale_order(models.Model):
 
     @api.one
     @api.depends('order_line_monthly_untaxed', 'order_line_monthly_tax')
-    def _compute_order_line_monthly_tax(self):
+    def _compute_order_line_monthly_total(self):
         self.order_line_monthly_total = self.order_line_monthly_untaxed + self.order_line_monthly_tax
 
     @api.one
@@ -99,16 +99,34 @@ class sale_order(models.Model):
 
     @api.one
     @api.depends('order_line_normal_untaxed', 'order_line_normal_tax')
-    def _compute_order_line_normal_tax(self):
+    def _compute_order_line_normal_total(self):
         self.order_line_normal_total = self.order_line_normal_untaxed + self.order_line_normal_tax
 
+    @api.one
+    @api.depends('order_line_normal', 'order_line_normal_tax')
+    def _compute_order_line_normal_undiscounted(self):
+        total = 0.0
+        for line in self.order_line_normal:
+            total += line.price_subtotal + line.price_unit * ((line.discount or 0.0) / 100.0) * line.product_uom_qty
+        self.order_line_normal_undiscounted = total
 
-    order_line_normal = fields.One2many('sale.order.line', compute=_compute_order_line_normal)
-    order_line_normal_untaxed = fields.Float(compute=_compute_order_line_normal_untaxed)
-    order_line_normal_tax = fields.Float(compute=_compute_order_line_normal_tax)
-    order_line_normal_total = fields.Float(compute=_compute_order_line_normal_untaxed)
+    @api.one
+    @api.depends('order_line_monthly', 'order_line_monthly_tax')
+    def _compute_order_line_monthly_undiscounted(self):
+        total = 0.0
+        for line in self.order_line_monthly:
+            total += line.price_subtotal + line.price_unit * ((line.discount or 0.0) / 100.0) * line.product_uom_qty
+        self.order_line_monthly_undiscounted = total
 
-    order_line_monthly = fields.One2many('sale.order.line', compute=_compute_order_line_monthly)
-    order_line_monthly_untaxed = fields.Float(compute=_compute_order_line_monthly_untaxed)
-    order_line_monthly_tax = fields.Float(compute=_compute_order_line_monthly_tax)
-    order_line_monthly_total = fields.Float(compute=_compute_order_line_monthly_untaxed)
+    order_line_normal = fields.One2many('sale.order.line', compute='_compute_order_line_normal')
+    order_line_normal_untaxed = fields.Float(compute='_compute_order_line_normal_untaxed')
+    order_line_normal_tax = fields.Float(compute='_compute_order_line_normal_tax')
+    order_line_normal_total = fields.Float(compute='_compute_order_line_normal_total')
+    order_line_normal_undiscounted = fields.Float(compute='_compute_order_line_normal_undiscounted')
+
+    order_line_monthly = fields.One2many('sale.order.line', compute='_compute_order_line_monthly')
+    order_line_monthly_untaxed = fields.Float(compute='_compute_order_line_monthly_untaxed')
+    order_line_monthly_tax = fields.Float(compute='_compute_order_line_monthly_tax')
+    order_line_monthly_total = fields.Float(compute='_compute_order_line_monthly_total')
+    order_line_monthly_undiscounted = fields.Float(compute='_compute_order_line_monthly_undiscounted')
+

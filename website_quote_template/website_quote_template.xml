@@ -50,7 +50,9 @@
                 </t>
               </td>
               <td>
-                <a t-attf-href="{{'#%s' % line.id}}"><h3 t-field="line.product_id.name"/></a>
+                <a t-attf-href="{{'#%s' % line.id}}">
+                  <h3 t-field="line.product_id.name" />
+                </a>
               </td>
               <td>
                 <div id="quote_qty">
@@ -194,17 +196,41 @@
                     </div>
                     <div class="text-center mb16" t-if="quotation.amount_undiscounted &gt; quotation.amount_untaxed">
                       <p class="text-muted mb8">Your advantage:</p>
-                      <t t-if="quotation.amount_untaxed == quotation.amount_total">
-                        <strong t-field="quotation.amount_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                        <strong t-field="quotation.amount_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
+                      <t t-if="quotation.order_line_monthly_untaxed == quotation.order_line_monthly_total">
+                        <p>
+                          Monthly:
+                          <strong t-field="quotation.order_line_monthly_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                          <strong t-field="quotation.order_line_monthly_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
+                        </p>
                       </t>
-                      <t t-if="quotation.amount_untaxed != quotation.amount_total">
-                        <strong t-field="quotation.amount_untaxed" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                        <strong t-field="quotation.amount_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
-                        <br />
-                        (
-                        <span t-field="quotation.amount_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                        Incl. tax)
+                      <t t-if="quotation.order_line_monthly_untaxed != quotation.order_line_monthly_total">
+                        <p>
+                          Monthly:
+                          <strong t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                          <strong t-field="quotation.order_line_monthly_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
+                          <br />
+                          (
+                          <span t-field="quotation.order_line_monthly_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                          Incl. tax)
+                        </p>
+                      </t>
+                      <t t-if="quotation.order_line_normal_untaxed == quotation.order_line_normal_total">
+                        <p>
+                          Pricing:
+                          <strong t-field="quotation.order_line_normal_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                          <strong t-field="quotation.order_line_normal_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
+                        </p>
+                      </t>
+                      <t t-if="quotation.order_line_normal_untaxed != quotation.order_line_normal_total">
+                        <p>
+                          Pricing:
+                          <strong t-field="quotation.order_line_normal_untaxed" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                          <strong t-field="quotation.order_line_normal_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
+                          <br />
+                          (
+                          <span t-field="quotation.order_line_normal_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                          Incl. tax)
+                        </p>
                       </t>
                     </div>
                   </div>
