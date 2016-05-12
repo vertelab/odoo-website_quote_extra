@@ -20,6 +20,7 @@
 ##############################################################################
 
 from openerp import models, fields, api, _, tools
+from openerp import SUPERUSER_ID
 from openerp.exceptions import except_orm, Warning, RedirectWarning
 from openerp import http
 from openerp.http import request
@@ -36,7 +37,7 @@ class sale_quote_template(models.Model):
     _inherit = "sale.quote.template"
 
     def _def_qweb_id(self):
-        return self.env.ref('website_quote.so_template').id
+        return self.env.ref('website_quote.so_quotation')
     qweb_id = fields.Many2one(string="Qweb template",comodel_name="ir.ui.view",domain="[('type','=','qweb'),('mode','=','primary')]",default=_def_qweb_id)
 
 class sale_quote(openerp.addons.website_quote.controllers.main.sale_quote):
@@ -67,5 +68,5 @@ class sale_quote(openerp.addons.website_quote.controllers.main.sale_quote):
             'order_valid': (not order.validity_date) or (now <= order.validity_date),
             'days_valid': days,
         }
-        _logger.warn('Template %s' % order.template_id.qweb_id and order.template_id.qweb_id.xml_id or 'website_quote.so_quotation')
+        _logger.warn('--------------------------Template %s' % (order.template_id.qweb_id and order.template_id.qweb_id.xml_id or 'website_quote.so_quotation'))
         return request.website.render(order.template_id.qweb_id and order.template_id.qweb_id.xml_id or 'website_quote.so_quotation', values)
