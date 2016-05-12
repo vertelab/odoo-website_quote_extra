@@ -24,7 +24,7 @@
           </section>
         </t>
       </section>
-      <section t-att-id="'quote_%s' % product_section_title if product_section_title else 'quote'">
+      <section t-att-id="'quote_%s' % product_section_title if product_section_title else 'quote'" class="table-responsive">
         <table class="table">
           <thead>
             <tr>
@@ -413,7 +413,7 @@
         <section data-snippet-id="title">
           <h1 class="page-header">Options</h1>
         </section>
-        <section id="options">
+        <section id="options" class="table-responsive">
           <table class="table table-hover">
             <tbody>
               <tr t-foreach="quotation.options" t-as="option">
