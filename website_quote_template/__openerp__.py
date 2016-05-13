@@ -26,7 +26,7 @@
     'summary': 'Additional quote templates',
     'licence': 'AGPL-3',
     'description': """
-Additional quotation templates
+Additional quotation templates with sepation of monthly costs and one time prices
 """,
     'author': 'Vertel AB',
     'website': 'http://www.vertel.se',
@@ -35,6 +35,8 @@ Additional quotation templates
     #~ 'website_quote_table.xml',
     'website_quote_template.xml',
     'website_quote_data.xml',
+    'product_view.xml',
+
     ],
     'application': False,
     'installable': True,

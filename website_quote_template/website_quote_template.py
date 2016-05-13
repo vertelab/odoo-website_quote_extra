@@ -29,6 +29,8 @@ class product_template(models.Model):
     _inherit = 'product.template'
 
     bootstrap_icon = fields.Char(string='Bootstrap Icon', help="eg fa fa-laptop")
+    description_quote = fields.Text(string="Description for quotations",translate=True,help="A description of the Product that you want to communicate to your customers on on-line quotes.") 
+    
 
 class sale_order_option(models.Model):
     _inherit = 'sale.order.option'
