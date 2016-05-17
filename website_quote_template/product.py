@@ -31,4 +31,5 @@ class product_template(models.Model):
     bootstrap_icon = fields.Char(string='Bootstrap Icon', help="eg fa fa-laptop")
     description_quote = fields.Text(string="Description for quotations",translate=True,placeholder="note to be displayed on on-line quotations...",help="A description of the Product that you want to communicate to your customers on on-line quotes.") 
 
-                                
+
+# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

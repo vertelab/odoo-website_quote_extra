@@ -21,7 +21,7 @@
 
 {
     'name': 'Website Quotation Template',
-    'version': '0.2',
+    'version': '0.3',
     'category': 'Tools',
     'summary': 'Additional quote templates',
     'licence': 'AGPL-3',
@@ -36,7 +36,7 @@ Additional quotation templates with sepation of monthly costs and one time price
     'website_quote_template.xml',
     'website_quote_data.xml',
     'product_view.xml',
-
+    'sale_view.xml',
     ],
     'application': False,
     'installable': True,

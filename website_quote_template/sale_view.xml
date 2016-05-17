@@ -9,6 +9,9 @@
         <field name="price_subtotal" position="after">
           <field name="view_on_quote" />
         </field>
+        <field name="address_allotment_id" position="after">
+          <field name="view_on_quote" />
+        </field>
       </field>
     </record>
   </data>
