@@ -7,8 +7,13 @@
       <field name="inherit_id" ref="product.product_template_form_view" />
       <field name="arch" type="xml">
         <separator string="Description for Quotations" position="after">
-          <field name="bootstrap_icon" />
+          <label for="bootstrap_icon" string="Bootstrap Icon" />
+          <field name="bootstrap_icon" placeholder="fa-boostrap icon name" />
+          <label for="description_quote" string="Description Quote" />
           <field name="description_quote" />
+          <label for="website_description" string="Website Description" />
+          <field name="website_description" />
+          <label for="description_sale" string="Description Sale" />
         </separator>
       </field>
     </record>
