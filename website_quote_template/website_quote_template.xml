@@ -50,9 +50,16 @@
                 </t>
               </td>
               <td>
-                <a t-attf-href="{{'#%s' % line.id}}">
-                  <h3 t-field="line.product_id.name" />
-                </a>
+                <div class="col-md-12">
+                  <a t-attf-href="{{'#%s' % line.product_id.id}}">
+                    <div class="col-md-12 pull-left" style="width: 100%; margin-top: 12px; margin-bottom: 12px; padding: 0px;">
+                      <strong>
+                        <h3 t-field="line.product_id.name" style="margin: 0px;" />
+                      </strong>
+                    </div>
+                  </a>
+                  <p t-field="line.product_id.description_quote" style="padding-left: 15px;" />
+                </div>
               </td>
               <td>
                 <div id="quote_qty">
@@ -386,17 +393,19 @@
                 <a id="offer" />
                 <div t-field="quotation.website_description" />
                 <t t-foreach="quotation.order_line" t-as="line">
-                  <a t-att-id="line.id" />
-                  <div t-field="line.website_description" />
+                  <t t-if="line.view_on_quote">
+                    <a t-att-id="line.product_id.id" />
+                    <div t-field="line.product_id.website_description" />
+                  </t>
                 </t>
                 <div class="oe_structure" />
                 <a id="pricing" />
                 <t t-call="website_quote_template.pricing">
-                  <t t-set="product_section_title" t-value="'Monthly Costs'" />
-                  <t t-set="product_uom_filter" t-value="'monthly'" />
+                  <t t-set="product_uom_filter" t-value="'normal'" />
                 </t>
                 <t t-call="website_quote_template.pricing">
-                  <t t-set="product_uom_filter" t-value="'normal'" />
+                  <t t-set="product_section_title" t-value="'Monthly Costs'" />
+                  <t t-set="product_uom_filter" t-value="'monthly'" />
                 </t>
                 <a id="options" />
                 <t t-call="website_quote_template.optional_products" />
@@ -418,7 +427,7 @@
             <tbody>
               <tr t-foreach="quotation.options" t-as="option">
                 <t t-if="not option.line_id">
-                  <td style="display: table-cell; vertical-align: middle;">
+                  <td style="display: table-cell; vertical-align: middle; width: 60px;">
                     <t t-if="option.product_id.bootstrap_icon">
                       <p class="text-center">
                         <i t-att-class="'fa fa-%s fa-5x' %option.product_id.bootstrap_icon" />
@@ -430,12 +439,12 @@
                   </td>
                   <td>
                     <div class="col-md-12">
-                      <div class="o_image_floating o_margin_l pull-left" style="width: auto; margin-right: 25px; margin-top: 12px;">
+                      <div class="col-md-12 pull-left" style="width: 100%; margin-top: 12px; margin-bottom: 12px; padding: 0px;">
                         <strong>
-                          <h3 t-field="option.title" style="margin: 0px;" />
+                          <h3 t-field="option.product_id.name" style="margin: 0px;" />
                         </strong>
                       </div>
-                      <p t-field="option.body" style="text-align: justify;" />
+                      <p t-field="option.product_id.description_quote" style="" />
                     </div>
                   </td>
                   <td>
