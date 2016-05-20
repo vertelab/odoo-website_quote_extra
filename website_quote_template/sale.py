@@ -30,21 +30,20 @@ class sale_order_line(models.Model):
 
     view_on_quote = fields.Boolean(string="Q",help="View on quotation")
 
-                                
 
 class sale_order_option(models.Model):
     _inherit = 'sale.order.option'
 
-    title = fields.Char(compute='_get_title_and_body', store=True)
-    body = fields.Text(compute='_get_title_and_body', store=True)
+    #~ title = fields.Char(compute='_get_title_and_body', store=True)
+    #~ body = fields.Text(compute='_get_title_and_body', store=True)
 
-    @api.one
-    @api.depends('name')
-    def _get_title_and_body(self):
-        l = self.name.split('\n', 1)
-        self.title = l[0]
-        if len(l) == 2:
-            self.body = l[1]
+    #~ @api.one
+    #~ @api.depends('name')
+    #~ def _get_title_and_body(self):
+        #~ l = self.name.split('\n', 1)
+        #~ self.title = l[0]
+        #~ if len(l) == 2:
+            #~ self.body = l[1]
 
 
 class sale_order(models.Model):

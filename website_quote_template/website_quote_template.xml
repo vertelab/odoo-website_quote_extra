@@ -11,156 +11,7 @@
         </field>
       </field>
     </record>
-    <template id="pricing" name="Pricing">
-      <section data-snippet-id="title">
-        <t t-if="product_uom_filter == 'monthly'">
-          <section data-snippet-id="title">
-            <h1 class="page-header">Monthly Costs</h1>
-          </section>
-        </t>
-        <t t-if="product_uom_filter != 'monthly'">
-          <section data-snippet-id="title">
-            <h1 class="page-header">Pricing</h1>
-          </section>
-        </t>
-      </section>
-      <section t-att-id="'quote_%s' % product_section_title if product_section_title else 'quote'" class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th />
-              <th>Products</th>
-              <th>Quantity</th>
-              <th>Taxes</th>
-              <th />
-              <th class="text-right">Unit Price</th>
-              <th class="text-right">Price</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr t-foreach="quotation.order_line_monthly if product_uom_filter == 'monthly' else quotation.order_line_normal if product_uom_filter == 'normal' else quotation.order_line" t-as="line">
-              <td>
-                <t t-if="line.product_id.bootstrap_icon">
-                  <p class="text-center">
-                    <i t-att-class="'fa fa-%s fa-5x' %line.product_id.bootstrap_icon" />
-                  </p>
-                </t>
-                <t t-if="not line.product_id.bootstrap_icon">
-                  <span itemprop="image" t-field="line.product_id.image_medium" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img img-responsive&quot;, &quot;alt-field&quot;: &quot;name&quot;}" />
-                </t>
-              </td>
-              <td>
-                <a t-attf-href="{{'#%s' % line.id}}">
-                  <h3 t-field="line.product_id.name" />
-                </a>
-              </td>
-              <td>
-                <div id="quote_qty">
-                  <span t-field="line.product_uom_qty" />
-                  <span t-field="line.product_uom" />
-                </div>
-              </td>
-              <td>
-                <div t-foreach="line.tax_id" t-as="tax">
-                  <t t-esc="tax.name" />
-                </div>
-              </td>
-              <td>
-                <strong t-if="line.discount" class="text-info">
-                  <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount" />
-                  % discount
-                </strong>
-              </td>
-              <td>
-                <strong class="text-right">
-                  <div t-field="line.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" />
-                  <!-- TODO: apply monetary widget formating -->
-                  <div t-if="line.discount">
-                    <t t-esc="'%.2f' % ((1-line.discount / 100.0) * line.price_unit)" />
-                  </div>
-                </strong>
-              </td>
-              <td>
-                <div class="text-right" t-field="line.price_subtotal" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-              </td>
-              <td>
-                <a t-attf-href="./update_line/#{ line.id }/?order_id=#{ quotation.id }&amp;unlink=True&amp;token=#{ quotation.access_token }" class="mb8 js_update_line_json pull-right hidden-print" t-if="line.option_line_id">
-                  <span class="fa fa-trash-o" />
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td class="text-right">
-                <strong>Subtotal:</strong>
-              </td>
-              <td class="text-right">
-                <t t-if="not product_uom_filter">
-                  <strong data-id="total_amount" t-field="quotation.amount_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-                <t t-if="product_uom_filter == 'monthly'">
-                  <strong data-id="total_amount" t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-                <t t-if="product_uom_filter == 'normal'">
-                  <strong data-id="total_amount" t-field="quotation.order_line_normal_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-              </td>
-            </tr>
-            <tr>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td class="text-right">Taxes:</td>
-              <td class="text-right">
-                <t t-if="not product_uom_filter">
-                  <span data-id="total_amount" t-field="quotation.amount_tax" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-                <t t-if="product_uom_filter == 'monthly'">
-                  <span data-id="total_amount" t-field="quotation.order_line_monthly_tax" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-                <t t-if="product_uom_filter == 'normal'">
-                  <span data-id="total_amount" t-field="quotation.order_line_normal_tax" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-              </td>
-            </tr>
-            <tr>
-              <td />
-              <td />
-              <td />
-              <td />
-              <td />
-              <td class="text-right">
-                <strong>Total:</strong>
-              </td>
-              <td class="text-right">
-                <t t-if="not product_uom_filter">
-                  <strong data-id="total_amount" t-field="quotation.amount_total" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-                <t t-if="product_uom_filter == 'monthly'">
-                  <strong data-id="total_amount" t-field="quotation.order_line_monthly_total" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-                <t t-if="product_uom_filter == 'normal'">
-                  <strong data-id="total_amount" t-field="quotation.order_line_normal_total" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
-                </t>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      <t t-if="not product_uom_filter or product_uom_filter == 'normal'">
-        <t t-call="website_quote.quotation_toolbar" />
-        <section id="terms" class="container" t-if="quotation.note">
-          <h2 class="page-header">Terms &amp; Conditions</h2>
-          <p t-field="quotation.note" />
-        </section>
-      </t>
-    </template>
+    <!-- main template -->
     <template id="so_quotation_monthly" name="SO Quotation Monthly">
       <t t-call="website.layout">
         <body data-spy="scroll" data-target=".navspy" data-offset="50">
@@ -386,17 +237,19 @@
                 <a id="offer" />
                 <div t-field="quotation.website_description" />
                 <t t-foreach="quotation.order_line" t-as="line">
-                  <a t-att-id="line.id" />
-                  <div t-field="line.website_description" />
+                  <t t-if="line.view_on_quote">
+                    <a t-att-id="line.product_id.id" />
+                    <div t-field="line.product_id.website_description" />
+                  </t>
                 </t>
                 <div class="oe_structure" />
                 <a id="pricing" />
                 <t t-call="website_quote_template.pricing">
-                  <t t-set="product_section_title" t-value="'Monthly Costs'" />
-                  <t t-set="product_uom_filter" t-value="'monthly'" />
+                  <t t-set="product_uom_filter" t-value="'normal'" />
                 </t>
                 <t t-call="website_quote_template.pricing">
-                  <t t-set="product_uom_filter" t-value="'normal'" />
+                  <t t-set="product_section_title" t-value="'Monthly Costs'" />
+                  <t t-set="product_uom_filter" t-value="'monthly'" />
                 </t>
                 <a id="options" />
                 <t t-call="website_quote_template.optional_products" />
@@ -408,6 +261,117 @@
         </body>
       </t>
     </template>
+    <!-- pricing template -->
+    <template id="pricing" name="Pricing">
+      <section data-snippet-id="title">
+        <t t-if="product_uom_filter == 'monthly'">
+          <section data-snippet-id="title">
+            <h1 class="page-header">Monthly Costs</h1>
+          </section>
+        </t>
+        <t t-if="product_uom_filter != 'monthly'">
+          <section data-snippet-id="title">
+            <h1 class="page-header">Pricing</h1>
+          </section>
+        </t>
+      </section>
+      <section t-att-id="'quote_%s' % product_section_title if product_section_title else 'quote'" class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th />
+              <th>Product(s)</th>
+              <th />
+              <th class="text-right">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr t-foreach="quotation.order_line_monthly if product_uom_filter == 'monthly' else quotation.order_line_normal if product_uom_filter == 'normal' else quotation.order_line" t-as="line">
+              <td style="display: table-cell; vertical-align: middle; width: 60px;">
+                <t t-if="line.product_id.bootstrap_icon">
+                  <p class="text-center">
+                    <i t-att-class="'fa fa-%s fa-5x' %line.product_id.bootstrap_icon" />
+                  </p>
+                </t>
+                <t t-if="not line.product_id.bootstrap_icon">
+                  <span itemprop="image" t-field="line.product_id.image_medium" t-field-options="{&quot;widget&quot;: &quot;image&quot;, &quot;class&quot;: &quot;img img-responsive&quot;, &quot;alt-field&quot;: &quot;name&quot;}" />
+                </t>
+              </td>
+              <td>
+                <div class="col-md-12">
+                  <a t-attf-href="{{'#%s' % line.product_id.id}}">
+                    <div class="col-md-12 pull-left" style="width: 100%; margin-top: 12px; margin-bottom: 12px; padding: 0px;">
+                      <strong>
+                        <h4 t-field="line.product_id.name" style="margin: 0px;" />
+                      </strong>
+                    </div>
+                  </a>
+                  <p t-field="line.product_id.description_quote" />
+                </div>
+              </td>
+              <td>
+                <strong t-if="line.discount" class="text-info">
+                  <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount" />
+                  % discount
+                </strong>
+              </td>
+              <td>
+                <span class="text-right">
+                  <div>
+                    <span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" />
+                    *
+                    <span t-field="line.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" />
+                    <span t-if="line.discount">
+                      <t t-esc="'%.2f' % ((1-line.discount / 100.0) * line.price_unit)" /> <t t-esc="quotation.currency_id.symbol" />
+                    </span>
+                    /
+                    <span t-field="line.product_uom" />
+                  </div>
+                  <!-- TODO: apply monetary widget formating -->
+                </span>
+              </td>
+              <!--
+                   <td>
+                   <div class="text-right" t-field="line.price_subtotal" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                   </td>
+              -->
+              <td>
+                <a t-attf-href="./update_line/#{ line.id }/?order_id=#{ quotation.id }&amp;unlink=True&amp;token=#{ quotation.access_token }" class="mb8 js_update_line_json pull-right hidden-print" t-if="line.option_line_id">
+                  <span class="fa fa-trash-o" />
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td />
+              <td />
+              <td class="text-right">
+                <strong>Total (exkl moms):</strong>
+              </td>
+              <td class="text-right">
+                <t t-if="not product_uom_filter">
+                  <strong data-id="total_amount" t-field="quotation.amount_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+                </t>
+                <t t-if="product_uom_filter == 'monthly'">
+                  <strong data-id="total_amount" t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+                </t>
+                <t t-if="product_uom_filter == 'normal'">
+                  <strong data-id="total_amount" t-field="quotation.order_line_normal_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+                </t>
+              </td>
+              <td />
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <t t-if="not product_uom_filter or product_uom_filter == 'monthly'">
+        <t t-call="website_quote.quotation_toolbar" />
+        <section id="terms" class="container" t-if="quotation.note">
+          <h2 class="page-header">Terms &amp; Conditions</h2>
+          <p t-field="quotation.note" />
+        </section>
+      </t>
+    </template>
+    <!-- option template -->
     <template id="optional_products" name="Optional Products">
       <div class="container mt32" t-if="option">
         <section data-snippet-id="title">
@@ -418,7 +382,7 @@
             <tbody>
               <tr t-foreach="quotation.options" t-as="option">
                 <t t-if="not option.line_id">
-                  <td style="display: table-cell; vertical-align: middle;">
+                  <td style="display: table-cell; vertical-align: middle; width: 60px;">
                     <t t-if="option.product_id.bootstrap_icon">
                       <p class="text-center">
                         <i t-att-class="'fa fa-%s fa-5x' %option.product_id.bootstrap_icon" />
@@ -430,27 +394,30 @@
                   </td>
                   <td>
                     <div class="col-md-12">
-                      <div class="o_image_floating o_margin_l pull-left" style="width: auto; margin-right: 25px; margin-top: 12px;">
+                      <div class="col-md-12 pull-left" style="width: 100%; margin-top: 12px; margin-bottom: 12px; padding: 0px;">
                         <strong>
-                          <h3 t-field="option.title" style="margin: 0px;" />
+                          <h4 t-field="option.product_id.name" style="margin: 0px;" />
                         </strong>
                       </div>
-                      <p t-field="option.body" style="text-align: justify;" />
+                      <p t-field="option.product_id.description_quote" style="" />
                     </div>
                   </td>
                   <td>
-                    <strong class="text-center">
-                      <div t-field="option.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="option.discount and 'text-decoration: line-through' or ''" t-att-class="option.discount and 'text-danger' or ''" />
-                      <div t-field="option.product_id.uom_id.name" />
-                      <div t-if="option.discount">
-                        <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)" />
+                    <span class="text-right">
+                      <div>
+                        <span t-field="option.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="option.discount and 'text-decoration: line-through' or ''" t-att-class="option.discount and 'text-danger' or ''" />
+                        <span t-if="option.discount">
+                          <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)" />  <t t-esc="quotation.currency_id.symbol" />
+                        </span>
+                        /
+                        <span t-field="option.product_id.uom_id.name" />
+                        <span class="text-center" t-if="quotation.state in ['draft', 'sent']">
+                          <a t-attf-href="/quote/add_line/#{ option.id }/#{ quotation.id }/#{ quotation.access_token }" class="mb8 hidden-print">
+                            <span class="fa fa-shopping-cart" />
+                          </a>
+                        </span>
                       </div>
-                    </strong>
-                    <div class="text-center" t-if="quotation.state in ['draft', 'sent']">
-                      <a t-attf-href="/quote/add_line/#{ option.id }/#{ quotation.id }/#{ quotation.access_token }" class="mb8 hidden-print">
-                        <span class="fa fa-shopping-cart" />
-                      </a>
-                    </div>
+                    </span>
                   </td>
                 </t>
               </tr>
@@ -458,6 +425,62 @@
           </table>
         </section>
       </div>
+    </template>
+    <!-- additional colum for tax -->
+    <template id="show_tax" inherit_id="website_quote_template.pricing" customize_show="True" active="False" name="Show Tax">
+      <xpath expr="//th[2]" position="after">
+        <th>Taxes</th>
+      </xpath>
+      <xpath expr="//td[2]" position="after">
+        <td>
+          <div t-foreach="line.tax_id" t-as="tax">
+            <t t-esc="tax.name" />
+          </div>
+        </td>
+      </xpath>
+      <xpath expr="//tbody/tr[2]/td[2]" position="after">
+        <td />
+      </xpath>
+      <xpath expr="//tbody/tr[2]" position="after">
+        <tr>
+          <td />
+          <td />
+          <td />
+          <td />
+          <td class="text-right">Taxes:</td>
+          <td class="text-right">
+            <t t-if="not product_uom_filter">
+              <span data-id="total_amount" t-field="quotation.amount_tax" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+            </t>
+            <t t-if="product_uom_filter == 'monthly'">
+              <span data-id="total_amount" t-field="quotation.order_line_monthly_tax" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+            </t>
+            <t t-if="product_uom_filter == 'normal'">
+              <span data-id="total_amount" t-field="quotation.order_line_normal_tax" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+            </t>
+          </td>
+        </tr>
+        <tr>
+          <td />
+          <td />
+          <td />
+          <td />
+          <td class="text-right">
+            <strong>Total:</strong>
+          </td>
+          <td class="text-right">
+            <t t-if="not product_uom_filter">
+              <strong data-id="total_amount" t-field="quotation.amount_total" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+            </t>
+            <t t-if="product_uom_filter == 'monthly'">
+              <strong data-id="total_amount" t-field="quotation.order_line_monthly_total" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+            </t>
+            <t t-if="product_uom_filter == 'normal'">
+              <strong data-id="total_amount" t-field="quotation.order_line_normal_total" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+            </t>
+          </td>
+        </tr>
+      </xpath>
     </template>
   </data>
 </openerp>
