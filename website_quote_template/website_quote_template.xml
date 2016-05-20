@@ -314,7 +314,7 @@
               </td>
               <td style="min-width: 200px;">
                   <div class="text-right">
-                    <t t-if="line.product_uom_qty &gt; 1"><span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" /> * <span t-esc="'%.0d' %line.price_unit" t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" /> <t t-esc="quotation.currency_id.symbol" /></t>
+                    <t t-if="line.product_uom_qty &gt; 1"><span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" /> * </t><span t-esc="'%.0d' %line.price_unit" t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" /> <t t-esc="quotation.currency_id.symbol" />
                     <span t-if="line.discount">
                       <t t-esc="'%.0d' % ((1-line.discount / 100.0) * line.price_unit)" />
                       <t t-esc="quotation.currency_id.symbol" />
