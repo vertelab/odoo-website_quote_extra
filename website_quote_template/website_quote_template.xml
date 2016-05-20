@@ -321,16 +321,12 @@
               <td>
                 <span class="text-right">
                   <div>
-                    <span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" />
-                    *
-                    <span t-field="line.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" />
+                    <span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" /> * <span t-field="line.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" />
                     <span t-if="line.discount">
                       <t t-esc="'%.2f' % ((1-line.discount / 100.0) * line.price_unit)" />
                       <t t-esc="quotation.currency_id.symbol" />
                     </span>
-                    <t t-if="line.product_uom.category_id.id != 1">
-                      /
-                      <span t-field="line.product_uom" />
+                    <t t-if="line.product_uom.category_id.id != 1"> / <span t-field="line.product_uom" />
                     </t>
                   </div>
                   <!-- TODO: apply monetary widget formating -->
@@ -358,7 +354,7 @@
                   <strong data-id="total_amount" t-field="quotation.amount_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
                 </t>
                 <t t-if="product_uom_filter == 'monthly'">
-                  <strong data-id="total_amount" t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' /> / Month
+                  <strong data-id="total_amount" t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
                 </t>
                 <t t-if="product_uom_filter == 'normal'">
                   <strong data-id="total_amount" t-field="quotation.order_line_normal_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
