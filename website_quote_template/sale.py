@@ -29,7 +29,15 @@ class sale_order_line(models.Model):
     _inherit = 'sale.order.line'
 
     view_on_quote = fields.Boolean(string="Q",help="View on quotation")
-
+    @api.one
+    @api.depends('product_id.list_price','price_unit', 'discount')
+    def _given_discount(self):
+        unit_price = self.price_unit * (1 - self.discount / 100) 
+        if self.product_id.lst_price > 1: # not individual price
+            self.given_discount = (1 - unit_price  / self.product_id.lst_price) * 100
+    given_discount = fields.Float(compute='_given_discount')
+    
+    
 
 class sale_order_option(models.Model):
     _inherit = 'sale.order.option'
