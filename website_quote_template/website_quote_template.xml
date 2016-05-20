@@ -287,7 +287,7 @@
           </thead>
           <tbody>
             <tr t-foreach="quotation.order_line_monthly if product_uom_filter == 'monthly' else quotation.order_line_normal if product_uom_filter == 'normal' else quotation.order_line" t-as="line">
-              <td style="display: table-cell; vertical-align: middle; width: 60px;">
+              <td style="display: table-cell; vertical-align: middle; width: 100px;">
                 <t t-if="line.product_id.bootstrap_icon">
                   <p class="text-center">
                     <i t-att-class="'fa fa-%s fa-5x' %line.product_id.bootstrap_icon" />
@@ -299,18 +299,21 @@
               </td>
               <td>
                 <div class="col-md-12">
-                  <a t-attf-href="{{'#%s' % line.product_id.id}}">
-                    <div class="col-md-12 pull-left" style="width: 100%; margin-top: 12px; margin-bottom: 12px; padding: 0px;">
-                      <strong>
-                        <h4 t-field="line.product_id.name" style="margin: 0px;" />
-                      </strong>
-                    </div>
-                  </a>
-                  <p t-field="line.product_id.description_quote" />
+                  <p>
+                    <strong>
+                      <a t-attf-href="{{'#%s' % line.product_id.id}}">
+                        <span t-field="line.product_id.name" style="margin: 0px;" />
+                      </a>
+                    </strong>
+                    <t t-if="line.product_id.description_quote">
+                      :
+                      <span t-field="line.product_id.description_quote" />
+                    </t>
+                  </p>
                 </div>
               </td>
               <td>
-                <strong t-if="line.discount" class="text-info">
+                <strong t-if="line.discount" class="text-info text-right">
                   <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount" />
                   % discount
                 </strong>
@@ -322,10 +325,13 @@
                     *
                     <span t-field="line.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" />
                     <span t-if="line.discount">
-                      <t t-esc="'%.2f' % ((1-line.discount / 100.0) * line.price_unit)" /> <t t-esc="quotation.currency_id.symbol" />
+                      <t t-esc="'%.2f' % ((1-line.discount / 100.0) * line.price_unit)" />
+                      <t t-esc="quotation.currency_id.symbol" />
                     </span>
-                    /
-                    <span t-field="line.product_uom" />
+                    <t t-if="line.product_uom.category_id.id != 1">
+                      /
+                      <span t-field="line.product_uom" />
+                    </t>
                   </div>
                   <!-- TODO: apply monetary widget formating -->
                 </span>
@@ -352,7 +358,7 @@
                   <strong data-id="total_amount" t-field="quotation.amount_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
                 </t>
                 <t t-if="product_uom_filter == 'monthly'">
-                  <strong data-id="total_amount" t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
+                  <strong data-id="total_amount" t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' /> / Month
                 </t>
                 <t t-if="product_uom_filter == 'normal'">
                   <strong data-id="total_amount" t-field="quotation.order_line_normal_untaxed" t-field-options='{"widget": "monetary","display_currency": "quotation.pricelist_id.currency_id"}' />
@@ -382,7 +388,7 @@
             <tbody>
               <tr t-foreach="quotation.options" t-as="option">
                 <t t-if="not option.line_id">
-                  <td style="display: table-cell; vertical-align: middle; width: 60px;">
+                  <td style="display: table-cell; vertical-align: middle; width: 100px;">
                     <t t-if="option.product_id.bootstrap_icon">
                       <p class="text-center">
                         <i t-att-class="'fa fa-%s fa-5x' %option.product_id.bootstrap_icon" />
@@ -394,12 +400,17 @@
                   </td>
                   <td>
                     <div class="col-md-12">
-                      <div class="col-md-12 pull-left" style="width: 100%; margin-top: 12px; margin-bottom: 12px; padding: 0px;">
-                        <strong>
-                          <h4 t-field="option.product_id.name" style="margin: 0px;" />
-                        </strong>
+                      <div class="col-md-12" style="">
+                        <p>
+                          <strong>
+                            <span t-field="option.product_id.name" />
+                          </strong>
+                          <t t-if="option.product_id.description_quote">
+                            :
+                            <span t-field="option.product_id.description_quote" />
+                          </t>
+                        </p>
                       </div>
-                      <p t-field="option.product_id.description_quote" style="" />
                     </div>
                   </td>
                   <td>
@@ -407,7 +418,8 @@
                       <div>
                         <span t-field="option.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="option.discount and 'text-decoration: line-through' or ''" t-att-class="option.discount and 'text-danger' or ''" />
                         <span t-if="option.discount">
-                          <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)" />  <t t-esc="quotation.currency_id.symbol" />
+                          <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)" />
+                          <t t-esc="quotation.currency_id.symbol" />
                         </span>
                         /
                         <span t-field="option.product_id.uom_id.name" />
@@ -446,7 +458,6 @@
           <td />
           <td />
           <td />
-          <td />
           <td class="text-right">Taxes:</td>
           <td class="text-right">
             <t t-if="not product_uom_filter">
@@ -461,7 +472,6 @@
           </td>
         </tr>
         <tr>
-          <td />
           <td />
           <td />
           <td />
