@@ -13,6 +13,7 @@
           <field name="description_quote" />
           <label for="website_description" string="Website Description" />
           <field name="website_description" />
+          <newline/>
           <label for="description_sale" string="Description Sale" />
         </separator>
       </field>

@@ -1,0 +1,580 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* website_quote_template
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0-20151217\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-20 05:56+0000\n"
+"PO-Revision-Date: 2016-05-20 05:56+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "! You can"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "% discount"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "&times;"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid ",\n"
+"                          for an amount of"
+msgstr ""
+
+#. module: website_quote_template
+#: model:sale.quote.template,website_description:website_quote_template.website_quote_template_alpha
+msgid "<section data-snippet-id=\"title\">\n"
+"                    <h1 class=\"page-header\">Our Partnership Offer</h1>\n"
+"                </section>\n"
+"                <section data-snippet-id=\"text-block\">\n"
+"                    <div class=\"row\">\n"
+"                        <div class=\"col-md-12\">\n"
+"                            <p>\n"
+"                                Our partnership offer includes all you need to\n"
+"                                grow your business and deliver quality services\n"
+"                                with the Odoo Partner Program.\n"
+"                            </p><p>\n"
+"                                It includes <strong>discounts on Odoo\n"
+"                                Enterprise</strong>, technical and/or functional\n"
+"                                <strong>trainings</strong>,\n"
+"                                <strong>support</strong> services,\n"
+"                                <strong>marketing documents</strong>, access to\n"
+"                                the <strong>partner portal</strong>, rights to\n"
+"                                <strong>use the trademark</strong>, sales support\n"
+"                                from a <strong>dedicated account manager</strong>.\n"
+"                            </p>\n"
+"                        </div>\n"
+"                    </div>\n"
+"                </section>\n"
+"\n"
+"                <section data-snippet-id=\"pricing\">\n"
+"                    <div class=\"row mt32\">\n"
+"                        <div class=\"col-md-4\">\n"
+"                            <div class=\"panel panel-info\">\n"
+"                                <div class=\"panel-heading\">\n"
+"                                   <h3 class=\"panel-title\">A Valuable Product</h3>\n"
+"                                </div>\n"
+"                                <div class=\"panel-body\">\n"
+"                                   <p>\n"
+"                                       Deliver <strong>strong value added services</strong> as you can\n"
+"                                       rely on a leading open source software, with\n"
+"                                       the support of the publisher.\n"
+"                                   </p><p></p>\n"
+"                                       <strong>Grow with your existing customer base</strong>\n"
+"                                       by continuously proposing new modules.\n"
+"                                   \n"
+"                                </div>\n"
+"                            </div>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-4\">\n"
+"                            <div class=\"panel panel-info\">\n"
+"                                <div class=\"panel-heading\">\n"
+"                                   <h3 class=\"panel-title\">A Strong Demand</h3>\n"
+"                                </div>\n"
+"                                <div class=\"panel-body\">\n"
+"                                   <p>\n"
+"                                    Enjoy the traction of the <strong>fastest growing\n"
+"                                    management software</strong> in the world.\n"
+"                                   </p><p>\n"
+"                                    Benefit from the growing customer demand\n"
+"                                    and our Odoo brand.\n"
+"                                   </p>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-4\">\n"
+"                            <div class=\"panel panel-info\">\n"
+"                                <div class=\"panel-heading\">\n"
+"                                   <h3 class=\"panel-title\">High Margins</h3>\n"
+"                                </div>\n"
+"                                <div class=\"panel-body\">\n"
+"                                   <p>\n"
+"                                     <strong>Get high billing rates</strong> as you deliver a\n"
+"                                     highly valuable software.\n"
+"                                   </p><p>\n"
+"                                     Grow by developing a <strong>recurring\n"
+"                                     revenue flow</strong> from Odoo\n"
+"                                     Enterprise's commission system.\n"
+"                                   </p>\n"
+"                                </div>\n"
+"                            </div>\n"
+"                        </div>\n"
+"                    </div>\n"
+"                </section>\n"
+"\n"
+"                <section data-snippet-id=\"text-block\">\n"
+"                    <h2>A Dedicated Account Manager</h2>\n"
+"                    <p>\n"
+"                        We will assign you a dedicated account manager, an\n"
+"                        experienced sales person, to help you develop your\n"
+"                        Odoo business. The account manager helps you get\n"
+"                        leads, close deals, gives you feedback and best\n"
+"                        practices, delivers sales training and is your direct\n"
+"                        point of contact for any request you may have.\n"
+"                    </p>\n"
+"                </section>\n"
+"\n"
+"                <section data-snippet-id=\"text-block\">\n"
+"                    <div class=\"row\">\n"
+"                        <div class=\"col-md-12\">\n"
+"                            <h2>Get access to our experts</h2>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-7\">\n"
+"                            <p>\n"
+"                                For an extra fee, partners can get access to Odoo's\n"
+"                                core developers and functional experts. This can help\n"
+"                                you succeed in delivering more complex or bigger\n"
+"                                projects by getting the support of highly experienced\n"
+"                                consultants on demand.\n"
+"                            </p>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-5\">\n"
+"                            <img src=\"/website_quote/static/src/img/partner_icon_01.png\">\n"
+"                        </div>\n"
+"                    </div>\n"
+"                </section>\n"
+"\n"
+"                <section data-snippet-id=\"text-block\">\n"
+"                    <div class=\"row\">\n"
+"                        <div class=\"col-md-12\">\n"
+"                            <h2>Official certified partner</h2>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-7\">\n"
+"                            <p>\n"
+"                                Odoo promotes its partners through various ways:\n"
+"                                publication on our website, official communication,\n"
+"                                publication of your success stories, etc. As soon as\n"
+"                                you become an Odoo partner and have followed the\n"
+"                                official trainings, you will be visible on the partner\n"
+"                                directory listing.\n"
+"                            </p>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-5\">\n"
+"                            <img src=\"/website_quote/static/src/img/openerp_gold_partner.png\">\n"
+"                        </div>\n"
+"                    </div>\n"
+"                </section>\n"
+"\n"
+"                <section data-snippet-id=\"text-block\">\n"
+"                    <div class=\"row\">\n"
+"                        <div class=\"col-md-12\">\n"
+"                            <h2>Access to the Lead</h2>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-7\">\n"
+"                            <p>\n"
+"                                Every year, we redirect more than 100,000 customer\n"
+"                                requests to our official partners. These are prospects\n"
+"                                that filled a form on the Odoo website and wanted to\n"
+"                                use Odoo. The right partner to fulfill the customer\n"
+"                                request is selected based on the customer localization\n"
+"                                (nearest partner) and the grade of the partner.\n"
+"                            </p>\n"
+"                        </div>\n"
+"                        <div class=\"col-md-5\">\n"
+"                            <img src=\"/website_quote/static/src/img/partner_icon_02.png\" class=\"img\">\n"
+"                        </div>\n"
+"                    </div>\n"
+"                </section>\n"
+"\n"
+"                <section data-snippet-id=\"text-block\">\n"
+"                    <h2>Benefit from the Odoo branding</h2>\n"
+"                    <p>\n"
+"                        Every year, we redirect more than 100,000 customer\n"
+"                        requests to our official partners. These are prospects\n"
+"                        that filled a form on the Odoo website and wanted to\n"
+"                        use Odoo. The right partner to fulfill the customer\n"
+"                        request is selected based on the customer localization\n"
+"                        (nearest partner) and the grade of the partner.\n"
+"                    </p>\n"
+"                </section>\n"
+"\n"
+"                <section class=\"mb32\" data-snippet-id=\"text-block\">\n"
+"                    <h2>Test developments automatically</h2>\n"
+"                    <div class=\"row\">\n"
+"                        <div class=\"col-md-5\">\n"
+"                            <img src=\"/website_quote/static/src/img/partner_sc_01.png\" class=\"img shadow\">\n"
+"                        </div>\n"
+"                        <div class=\"col-md-7\">\n"
+"                            <p class=\"mt23\">\n"
+"                                Save time in your implementation project by having your\n"
+"                                developments tested automatically by our automated test\n"
+"                                servers. At every code commit, you get a full Odoo\n"
+"                                instance that you can try out online. When this\n"
+"                                instance is deployed, your code is automatically put\n"
+"                                through our 2000+ automated unit tests.\n"
+"                            </p><p>\n"
+"                                Our automated testing server software is called Runbot,\n"
+"                                and you can try it out here: http://runbot.openerp.com.\n"
+"                                A dedicated runbot server is available for every\n"
+"                                partner.\n"
+"                            </p>\n"
+"                        </div>\n"
+"                    </div>\n"
+"                </section>\n"
+"            "
+msgstr ""
+
+#. module: website_quote_template
+#: help:product.template,description_quote:0
+msgid "A description of the Product that you want to communicate to your customers on on-line quotes."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Accept Order"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Ask Changes"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Bill To:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:product.template:website_quote_template.inherit_product_template_form_view
+#: field:product.template,bootstrap_icon:0
+msgid "Bootstrap Icon"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Cancel"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Contact us"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Contact us for new quote."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Contact us to get a new quote."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Customer:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:product.template:website_quote_template.inherit_product_template_form_view
+msgid "Description Quote"
+msgstr ""
+
+#. module: website_quote_template
+#: view:product.template:website_quote_template.inherit_product_template_form_view
+msgid "Description Sale"
+msgstr ""
+
+#. module: website_quote_template
+#: view:product.template:website_quote_template.inherit_product_template_form_view
+msgid "Description for Quotations"
+msgstr ""
+
+#. module: website_quote_template
+#: field:product.template,description_quote:0
+msgid "Description for quotations"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "I agree that by signing this proposal, I\n"
+"                          accept it on the behalf of"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Incl. tax)"
+msgstr ""
+
+#. module: website_quote_template
+#: model:product.uom,name:website_quote_template.product_uom_month
+msgid "Month"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Monthly Costs"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Monthly:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.optional_products
+msgid "Options"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Price"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Pricing"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Pricing:"
+msgstr ""
+
+#. module: website_quote_template
+#: model:ir.model,name:website_quote_template.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Product(s)"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Quote Date:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Reject"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Reject This Quote"
+msgstr ""
+
+#. module: website_quote_template
+#: model:ir.model,name:website_quote_template.model_sale_order_option
+msgid "Sale Options"
+msgstr ""
+
+#. module: website_quote_template
+#: model:ir.model,name:website_quote_template.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: website_quote_template
+#: model:ir.model,name:website_quote_template.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Ship To:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Sign Order"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Taxes"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Taxes:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Tell us why you are refusing this quotation, this will help us improve our services."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Terms & Conditions"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "This offer expired!"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "This offer expires in"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "This order has already been"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "This order has been validated. Thanks for your trust\n"
+"                  and do not hesitate to"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "This quotation has been canceled."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "This quotation has been rejected."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Total (exkl moms):"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.pricing
+msgid "Total:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Update Quote"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Validate Order"
+msgstr ""
+
+#. module: website_quote_template
+#: help:sale.order.line,view_on_quote:0
+msgid "View on quotation"
+msgstr ""
+
+#. module: website_quote_template
+#: view:product.template:website_quote_template.inherit_product_template_form_view
+msgid "Website Description"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your Contact:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your Name:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your Order"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your Quotation"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your Reference:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your advantage:"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your feedback....."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Your message has been successfully sent!"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "cancelled"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "contact us"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "day"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "days"
+msgstr ""
+
+#. module: website_quote_template
+#: help:product.template,bootstrap_icon:0
+msgid "eg fa fa-laptop"
+msgstr ""
+
+#. module: website_quote_template
+#: view:product.template:website_quote_template.inherit_product_template_form_view
+msgid "fa-boostrap icon name"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "for\n"
+"                  any question."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "if you want a new one."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.optional_products
+msgid "note to be displayed on on-line quotations..."
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "or"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "validated"
+msgstr ""
+
+#. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "with payment terms:"
+msgstr ""
+
