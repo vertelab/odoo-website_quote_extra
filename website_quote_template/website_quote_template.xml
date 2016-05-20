@@ -413,9 +413,7 @@
                         <span t-if="option.discount">
                           <t t-esc="'%.0d' % ((1-option.discount / 100.0) * option.price_unit)" />
                           <t t-esc="quotation.currency_id.symbol" />
-                        </span>
-                        /
-                        <span t-field="option.product_id.uom_id.name" />
+                        </span><t t-if="option.product_id.uom_id.id != 1"> / <span t-field="option.product_id.uom_id.name" /></t>
                         <span class="text-center" t-if="quotation.state in ['draft', 'sent']">
                           <a t-attf-href="/quote/add_line/#{ option.id }/#{ quotation.id }/#{ quotation.access_token }" class="mb8 hidden-print">
                             <span class="fa fa-shopping-cart" />
