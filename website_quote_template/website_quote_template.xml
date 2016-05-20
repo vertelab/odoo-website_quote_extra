@@ -281,7 +281,6 @@
             <tr>
               <th />
               <th>Product(s)</th>
-              <th />
               <th class="text-right">Price</th>
             </tr>
           </thead>
@@ -301,9 +300,10 @@
                 <div class="col-md-12">
                   <p>
                     <strong>
-                      <a t-attf-href="{{'#%s' % line.product_id.id}}">
+                      <a t-if="line.view_on_quote" t-attf-href="{{'#%s' % line.product_id.id}}">
                         <span t-field="line.product_id.name" style="margin: 0px;" />
                       </a>
+                      <t t-if="not line.view_on_quote"><span t-field="line.product_id.name" style="margin: 0px;" /></t>
                     </strong>
                     <t t-if="line.product_id.description_quote">
                       :
@@ -312,25 +312,23 @@
                   </p>
                 </div>
               </td>
-              <td>
-                <strong t-if="line.discount" class="text-info text-right">
-                  <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount" />
-                  % discount
-                </strong>
-              </td>
-              <td>
-                <span class="text-right">
-                  <div>
-                    <span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" /> * <span t-field="line.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" />
+              <td style="min-width: 200px;">
+                  <div class="text-right">
+                    <t t-if="line.product_uom_qty &gt; 1"><span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" /> * <span t-esc="'%.0d' %line.price_unit" t-att-style="line.discount and 'text-decoration: line-through' or ''" t-att-class="line.discount and 'text-danger' or ''" /> <t t-esc="quotation.currency_id.symbol" /></t>
                     <span t-if="line.discount">
-                      <t t-esc="'%.2f' % ((1-line.discount / 100.0) * line.price_unit)" />
+                      <t t-esc="'%.0d' % ((1-line.discount / 100.0) * line.price_unit)" />
                       <t t-esc="quotation.currency_id.symbol" />
                     </span>
                     <t t-if="line.product_uom.category_id.id != 1"> / <span t-field="line.product_uom" />
                     </t>
                   </div>
                   <!-- TODO: apply monetary widget formating -->
-                </span>
+                  <div class="text-right">
+                    <strong t-if="line.discount" class="text-info">
+                      <t t-esc="((line.discount % 1) and '%s' or '%d') % line.discount" />
+                      % discount
+                    </strong>
+                </div>
               </td>
               <!--
                    <td>
@@ -344,7 +342,6 @@
               </td>
             </tr>
             <tr>
-              <td />
               <td />
               <td class="text-right">
                 <strong>Total (exkl moms):</strong>
@@ -409,12 +406,12 @@
                       </div>
                     </div>
                   </td>
-                  <td>
+                  <td style="min-width: 200px;">
                     <span class="text-right">
                       <div>
-                        <span t-field="option.price_unit" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' t-att-style="option.discount and 'text-decoration: line-through' or ''" t-att-class="option.discount and 'text-danger' or ''" />
+                        <span t-esc="'%.0d' %option.price_unit" t-att-style="option.discount and 'text-decoration: line-through' or ''" t-att-class="option.discount and 'text-danger' or ''" /> <t t-esc="quotation.currency_id.symbol" />
                         <span t-if="option.discount">
-                          <t t-esc="'%.2f' % ((1-option.discount / 100.0) * option.price_unit)" />
+                          <t t-esc="'%.0d' % ((1-option.discount / 100.0) * option.price_unit)" />
                           <t t-esc="quotation.currency_id.symbol" />
                         </span>
                         /
@@ -439,19 +436,18 @@
       <xpath expr="//th[2]" position="after">
         <th>Taxes</th>
       </xpath>
-      <xpath expr="//td[2]" position="after">
+      <xpath expr="//td[1]" position="after">
         <td>
           <div t-foreach="line.tax_id" t-as="tax">
             <t t-esc="tax.name" />
           </div>
         </td>
       </xpath>
-      <xpath expr="//tbody/tr[2]/td[2]" position="after">
+      <xpath expr="//tbody/tr[2]/td[1]" position="after">
         <td />
       </xpath>
       <xpath expr="//tbody/tr[2]" position="after">
         <tr>
-          <td />
           <td />
           <td />
           <td class="text-right">Taxes:</td>
@@ -468,7 +464,6 @@
           </td>
         </tr>
         <tr>
-          <td />
           <td />
           <td />
           <td class="text-right">
