@@ -30,28 +30,26 @@ class sale_order_line(models.Model):
 
     view_on_quote = fields.Boolean(string="Q",help="View on quotation")
     @api.one
-    @api.depends('product_id.list_price','price_unit', 'discount')
+    @api.depends('product_id.lst_price', 'price_unit', 'discount')
     def _given_discount(self):
-        unit_price = self.price_unit * (1 - self.discount / 100) 
         if self.product_id.lst_price > 1: # not individual price
-            self.given_discount = (1 - unit_price  / self.product_id.lst_price) * 100
+            self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
+            if self.discount:
+                self.given_discount += (1- self.given_discount / 100) * self.discount
     given_discount = fields.Float(compute='_given_discount')
-    
-    
+
 
 class sale_order_option(models.Model):
     _inherit = 'sale.order.option'
 
-    #~ title = fields.Char(compute='_get_title_and_body', store=True)
-    #~ body = fields.Text(compute='_get_title_and_body', store=True)
-
-    #~ @api.one
-    #~ @api.depends('name')
-    #~ def _get_title_and_body(self):
-        #~ l = self.name.split('\n', 1)
-        #~ self.title = l[0]
-        #~ if len(l) == 2:
-            #~ self.body = l[1]
+    @api.one
+    @api.depends('product_id.lst_price', 'price_unit', 'discount')
+    def _given_discount(self):
+        if self.product_id.lst_price > 1: # not individual price
+            self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
+            if self.discount:
+                self.given_discount += (1- self.given_discount / 100) * self.discount
+    given_discount = fields.Float(compute='_given_discount')
 
 
 class sale_order(models.Model):
