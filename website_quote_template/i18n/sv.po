@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_quote_template
+#   * website_quote_template
 #
 msgid ""
 msgstr ""
@@ -510,6 +510,11 @@ msgid "Incl. tax)"
 msgstr "inkl. moms)"
 
 #. module: website_quote_template
+#: view:website:website_quote_template.so_quotation_monthly
+msgid "Excl. tax)"
+msgstr "Exkl. moms)"
+
+#. module: website_quote_template
 #: model:product.uom,name:website_quote_template.product_uom_month
 msgid "Month"
 msgstr "Månad"
@@ -527,7 +532,7 @@ msgstr "Månatligt:"
 #. module: website_quote_template
 #: view:website:website_quote_template.optional_products
 msgid "Options"
-msgstr "Alternativ"
+msgstr "Optioner"
 
 #. module: website_quote_template
 #: view:website:website_quote_template.pricing
@@ -542,7 +547,7 @@ msgstr "Priser"
 #. module: website_quote_template
 #: view:website:website_quote_template.so_quotation_monthly
 msgid "Pricing:"
-msgstr "Prissättning:"
+msgstr "Priser:"
 
 #. module: website_quote_template
 #: model:ir.model,name:website_quote_template.model_product_template
@@ -706,7 +711,7 @@ msgstr "Er reference:"
 #. module: website_quote_template
 #: view:website:website_quote_template.so_quotation_monthly
 msgid "Your advantage:"
-msgstr "Dina fördelar:"
+msgstr "Ditt erbjudande:"
 
 #. module: website_quote_template
 #: view:website:website_quote_template.so_quotation_monthly

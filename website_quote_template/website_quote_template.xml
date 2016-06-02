@@ -47,42 +47,33 @@
                     </div>
                     <div class="text-center mb16" t-if="quotation.amount_undiscounted &gt; quotation.amount_untaxed">
                       <p class="text-muted mb8">Your advantage:</p>
-                      <t t-if="quotation.order_line_monthly_untaxed == quotation.order_line_monthly_total">
-                        <p>
-                          Monthly:
-                          <strong t-field="quotation.order_line_monthly_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                          <strong t-field="quotation.order_line_monthly_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
-                        </p>
-                      </t>
-                      <t t-if="quotation.order_line_monthly_untaxed != quotation.order_line_monthly_total">
-                        <p>
-                          Monthly:
-                          <strong t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                          <strong t-field="quotation.order_line_monthly_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
-                          <br />
-                          (
-                          <span t-field="quotation.order_line_monthly_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                          Incl. tax)
-                        </p>
-                      </t>
                       <t t-if="quotation.order_line_normal_untaxed == quotation.order_line_normal_total">
                         <p>
                           Pricing:
                           <strong t-field="quotation.order_line_normal_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                          <strong t-field="quotation.order_line_normal_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
                         </p>
                       </t>
                       <t t-if="quotation.order_line_normal_untaxed != quotation.order_line_normal_total">
                         <p>
                           Pricing:
                           <strong t-field="quotation.order_line_normal_untaxed" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                          <strong t-field="quotation.order_line_normal_undiscounted" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' style="text-decoration: line-through" class="text-danger" />
                           <br />
-                          (
-                          <span t-field="quotation.order_line_normal_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
-                          Incl. tax)
                         </p>
                       </t>
+                      <t t-if="quotation.order_line_monthly_untaxed == quotation.order_line_monthly_total">
+                        <p>
+                          Monthly:
+                          <strong t-field="quotation.order_line_monthly_total" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                        </p>
+                      </t>
+                      <t t-if="quotation.order_line_monthly_untaxed != quotation.order_line_monthly_total">
+                        <p>
+                          Monthly:
+                          <strong t-field="quotation.order_line_monthly_untaxed" t-field-options='{"widget": "monetary", "display_currency": "quotation.pricelist_id.currency_id"}' />
+                          <br />
+                        </p>
+                      </t>
+                      (Excl. tax)
                     </div>
                   </div>
                 </div>
@@ -242,17 +233,23 @@
                     <div t-field="line.product_id.website_description" />
                   </t>
                 </t>
-                <div class="oe_structure" />
+                <div class="oe_structure">
+                    <div t-field="quotation.template_id.detail_description" />
+                </div>
                 <a id="pricing" />
                 <t t-call="website_quote_template.pricing">
                   <t t-set="product_uom_filter" t-value="'normal'" />
                 </t>
+                <div class="oe_structure" />
                 <t t-call="website_quote_template.pricing">
                   <t t-set="product_section_title" t-value="'Monthly Costs'" />
                   <t t-set="product_uom_filter" t-value="'monthly'" />
                 </t>
                 <a id="options" />
                 <t t-call="website_quote_template.optional_products" />
+                <div class="oe_structure">
+                  <div t-field="quotation.template_id.reference" />
+                </div>
                 <a id="discussion" />
                 <t t-call="website_quote.chatter" />
               </div>
@@ -320,12 +317,12 @@
                     <span t-field="line.product_uom_qty" t-field-options="{&quot;precision&quot;: 0}" />
                     *
                   </t>
-                  <span t-att-style="line.given_discount and 'text-decoration: line-through' or ''" t-att-class="line.given_discount and 'text-danger' or ''">
-                    <t t-esc="'%.0d' %line.product_id.lst_price" />
+                  <span t-att-style="(line.given_discount or line.discount) and 'text-decoration: line-through' or ''" t-att-class="(line.given_discount or line.discount) and 'text-danger' or ''">
+                    <t t-esc="'%.0d' %line.price_unit" />
                     <t t-esc="quotation.currency_id.symbol" />
                   </span>
-                  <span t-if="line.given_discount != 0">
-                    <t t-esc="'%.0d' % ((1-line.given_discount / 100.0) * line.product_id.lst_price)" />
+                  <span t-if="line.given_discount or line.discount != 0">
+                    <t t-esc="'%.0d' %line.discounted_price if line.discounted_price != 0 else 0" />
                     <t t-esc="quotation.currency_id.symbol" />
                   </span>
                   <t t-if="line.product_uom.category_id.id != 1">
@@ -335,7 +332,7 @@
                 </div>
                 <!-- TODO: apply monetary widget formating -->
                 <div class="text-right">
-                  <strong t-if="line.given_discount != 0" class="text-info">
+                  <strong t-if="(line.given_discount or line.discount) != 0" class="text-info">
                     <t t-esc="'%.1f' %line.given_discount" />
                     % discount
                   </strong>
@@ -359,13 +356,22 @@
               </td>
               <td class="text-right">
                 <t t-if="not product_uom_filter">
-                  <strong data-id="total_amount"><t t-esc="'%.0f' %quotation.amount_untaxed"/> <t t-esc="quotation.currency_id.symbol" /></strong>
+                  <strong data-id="total_amount">
+                    <t t-esc="'%.0f' %quotation.amount_untaxed" />
+                    <t t-esc="quotation.currency_id.symbol" />
+                  </strong>
                 </t>
                 <t t-if="product_uom_filter == 'monthly'">
-                  <strong data-id="total_amount"><t t-esc="'%.0f' %quotation.order_line_monthly_untaxed"/> <t t-esc="quotation.currency_id.symbol" /></strong>
+                  <strong data-id="total_amount">
+                    <t t-esc="'%.0f' %quotation.order_line_monthly_untaxed" />
+                    <t t-esc="quotation.currency_id.symbol" />
+                  </strong>
                 </t>
                 <t t-if="product_uom_filter == 'normal'">
-                  <strong data-id="total_amount"><t t-esc="'%.0f' %quotation.order_line_normal_untaxed"/> <t t-esc="quotation.currency_id.symbol" /></strong>
+                  <strong data-id="total_amount">
+                    <t t-esc="'%.0f' %quotation.order_line_normal_untaxed" />
+                    <t t-esc="quotation.currency_id.symbol" />
+                  </strong>
                 </t>
               </td>
               <td />
@@ -377,7 +383,10 @@
         <t t-call="website_quote.quotation_toolbar" />
         <section id="terms" class="container" t-if="quotation.note">
           <h2 class="page-header">Terms &amp; Conditions</h2>
-          <p><span t-field="quotation.note" /> <a href="/page/anvandaravtal-odoo">Läs mer...</a></p>
+          <p>
+            <span t-field="quotation.note" />
+            <a href="/page/anvandaravtal-odoo">Läs mer...</a>
+          </p>
         </section>
       </t>
     </template>
@@ -419,12 +428,12 @@
                   </td>
                   <td style="min-width: 200px;">
                     <div class="text-right">
-                      <span t-att-style="option.given_discount and 'text-decoration: line-through' or ''" t-att-class="option.given_discount and 'text-danger' or ''">
-                        <t t-esc="'%.0d' %option.product_id.lst_price" />
+                      <span t-att-style="option.discount and 'text-decoration: line-through' or ''" t-att-class="option.discount and 'text-danger' or ''">
+                        <t t-esc="'%.0d' %option.price_unit" />
                         <t t-esc="quotation.currency_id.symbol" />
                       </span>
-                      <span t-if="option.given_discount != 0">
-                        <t t-esc="'%.0d' % ((1-option.given_discount / 100.0) * option.product_id.lst_price)" />
+                      <span t-if="option.discount != 0">
+                        <t t-esc="'%.0d' % ((1-option.discount / 100.0) * option.price_unit)" />
                         <t t-esc="quotation.currency_id.symbol" />
                       </span>
                       <t t-if="option.product_id.uom_id.id != 1">
@@ -437,8 +446,8 @@
                         </a>
                       </span>
                       <div class="text-right">
-                        <strong t-if="option.given_discount != 0" class="text-info">
-                          <t t-esc="'%.1f' %option.given_discount" />
+                        <strong t-if="option.discount != 0" class="text-info">
+                          <t t-esc="'%.1f' %option.discount" />
                           % discount
                         </strong>
                       </div>
@@ -473,13 +482,22 @@
           <td class="text-right">Taxes:</td>
           <td class="text-right">
             <t t-if="not product_uom_filter">
-              <span data-id="total_amount"><t t-esc="'%.0f' %quotation.amount_tax"/> <t t-esc="quotation.currency_id.symbol" /></span>
+              <span data-id="total_amount">
+                <t t-esc="'%.0f' %quotation.amount_tax" />
+                <t t-esc="quotation.currency_id.symbol" />
+              </span>
             </t>
             <t t-if="product_uom_filter == 'monthly'">
-              <span data-id="total_amount"><t t-esc="'%.0f' %quotation.order_line_monthly_tax"/> <t t-esc="quotation.currency_id.symbol" /></span>
+              <span data-id="total_amount">
+                <t t-esc="'%.0f' %quotation.order_line_monthly_tax" />
+                <t t-esc="quotation.currency_id.symbol" />
+              </span>
             </t>
             <t t-if="product_uom_filter == 'normal'">
-              <span data-id="total_amount"><t t-esc="'%.0f' %quotation.order_line_normal_tax"/> <t t-esc="quotation.currency_id.symbol" /></span>
+              <span data-id="total_amount">
+                <t t-esc="'%.0f' %quotation.order_line_normal_tax" />
+                <t t-esc="quotation.currency_id.symbol" />
+              </span>
             </t>
           </td>
         </tr>
@@ -491,13 +509,22 @@
           </td>
           <td class="text-right">
             <t t-if="not product_uom_filter">
-              <strong data-id="total_amount"><t t-esc="'%.0f' %quotation.amount_total"/> <t t-esc="quotation.currency_id.symbol" /></strong>
+              <strong data-id="total_amount">
+                <t t-esc="'%.0f' %quotation.amount_total" />
+                <t t-esc="quotation.currency_id.symbol" />
+              </strong>
             </t>
             <t t-if="product_uom_filter == 'monthly'">
-              <strong data-id="total_amount"><t t-esc="'%.0f' %quotation.order_line_monthly_total"/> <t t-esc="quotation.currency_id.symbol" /></strong>
+              <strong data-id="total_amount">
+                <t t-esc="'%.0f' %quotation.order_line_monthly_total" />
+                <t t-esc="quotation.currency_id.symbol" />
+              </strong>
             </t>
             <t t-if="product_uom_filter == 'normal'">
-              <strong data-id="total_amount"><t t-esc="'%.0f' %quotation.order_line_normal_total"/> <t t-esc="quotation.currency_id.symbol" /></strong>
+              <strong data-id="total_amount">
+                <t t-esc="'%.0f' %quotation.order_line_normal_total" />
+                <t t-esc="quotation.currency_id.symbol" />
+              </strong>
             </t>
           </td>
         </tr>

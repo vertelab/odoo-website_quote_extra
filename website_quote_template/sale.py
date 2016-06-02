@@ -24,6 +24,12 @@ from openerp import fields, api, models, _
 import logging
 _logger = logging.getLogger(__name__)
 
+class sale_quote_template(models.Model):
+    _inherit = 'sale.quote.template'
+
+    detail_description = fields.Html('Detail Description')
+    reference = fields.Html('Reference')
+
 
 class sale_order_line(models.Model):
     _inherit = 'sale.order.line'
@@ -33,23 +39,34 @@ class sale_order_line(models.Model):
     @api.depends('product_id.lst_price', 'price_unit', 'discount')
     def _given_discount(self):
         if self.product_id.lst_price > 1: # not individual price
-            self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
-            if self.discount:
-                self.given_discount += (1- self.given_discount / 100) * self.discount
+            self.given_discount = (1 - self.discounted_price / self.price_unit) * 100
+            #~ self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
+            #~ if self.discount != 0:
+                #~ self.given_discount = (1- self.given_discount / 100) * self.discount
     given_discount = fields.Float(compute='_given_discount')
 
 
 class sale_order_option(models.Model):
     _inherit = 'sale.order.option'
 
-    @api.one
-    @api.depends('product_id.lst_price', 'price_unit', 'discount')
-    def _given_discount(self):
-        if self.product_id.lst_price > 1: # not individual price
-            self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
-            if self.discount:
-                self.given_discount += (1- self.given_discount / 100) * self.discount
-    given_discount = fields.Float(compute='_given_discount')
+    #~ @api.onchange('product_id')
+    #~ def _onchange_product_id(self):
+        #~ super(sale_order_option, self)._onchange_product_id()
+        #~ product = self.product_id.with_context(lang=self.order_id.partner_id.lang)
+        #~ self.price_unit = product.list_price
+        #~ _logger.error('--------------- %s discount: %s' % (self.price_unit, self.discount))
+        #~ if product.list_price != 0:
+            #~ self.discount = (1 - self.price_unit / product.list_price) * 100
+
+
+    #~ @api.one
+    #~ @api.depends('product_id.lst_price', 'price_unit', 'discount')
+    #~ def _given_discount(self):
+        #~ if self.product_id.lst_price > 1: # not individual price
+            #~ self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
+            #~ if self.discount:
+                #~ self.given_discount = (1- self.given_discount / 100) * self.discount
+    #~ given_discount = fields.Float(compute='_given_discount')
 
 
 class sale_order(models.Model):
