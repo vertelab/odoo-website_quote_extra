@@ -49,24 +49,16 @@ class sale_order_line(models.Model):
 class sale_order_option(models.Model):
     _inherit = 'sale.order.option'
 
-    #~ @api.onchange('product_id')
-    #~ def _onchange_product_id(self):
-        #~ super(sale_order_option, self)._onchange_product_id()
-        #~ product = self.product_id.with_context(lang=self.order_id.partner_id.lang)
-        #~ self.price_unit = product.list_price
-        #~ _logger.error('--------------- %s discount: %s' % (self.price_unit, self.discount))
-        #~ if product.list_price != 0:
-            #~ self.discount = (1 - self.price_unit / product.list_price) * 100
-
-
-    #~ @api.one
-    #~ @api.depends('product_id.lst_price', 'price_unit', 'discount')
-    #~ def _given_discount(self):
-        #~ if self.product_id.lst_price > 1: # not individual price
-            #~ self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
-            #~ if self.discount:
-                #~ self.given_discount = (1- self.given_discount / 100) * self.discount
-    #~ given_discount = fields.Float(compute='_given_discount')
+    @api.onchange('product_id')
+    def _onchange_product_id(self):
+        super(sale_order_option, self)._onchange_product_id()
+        product = self.product_id.with_context(lang=self.order_id.partner_id.lang)
+        self.price_unit = product.list_price
+        if product and self.order_id.pricelist_id:
+            partner_id = self.order_id.partner_id.id
+            pricelist = self.order_id.pricelist_id.id
+            discounted_price = self.order_id.pricelist_id.price_get(product.id, self.quantity, partner_id)[pricelist]
+            self.discount = (1 - discounted_price / self.price_unit) * 100
 
 
 class sale_order(models.Model):
