@@ -45,6 +45,19 @@ class sale_order_line(models.Model):
                 #~ self.given_discount = (1- self.given_discount / 100) * self.discount
     given_discount = fields.Float(compute='_given_discount')
 
+    @api.multi
+    def product_id_change(self, pricelist, product, qty=0,
+            uom=False, qty_uos=0, uos=False, name='', partner_id=False,
+            lang=False, update_tax=True, date_order=False, packaging=False, fiscal_position=False, flag=False):
+        result = super(sale_order_line, self).product_id_change(pricelist, product, qty, uom, qty_uos, uos, name, partner_id, lang, update_tax, date_order, packaging, fiscal_position, flag)
+        product = self.env['product.product'].with_context(lang=self.order_id.partner_id.lang).browse(product)
+        result['value']['price_unit'] = product.list_price
+        if product and pricelist:
+            pricelist = self.env['product.pricelist'].browse(pricelist)
+            result['value']['discount'] = (1 - pricelist.price_get(product.id, qty, partner_id)[pricelist.id] / result['value']['price_unit']) * 100
+            # need round price_subtotal
+        return result
+
 
 class sale_order_option(models.Model):
     _inherit = 'sale.order.option'
