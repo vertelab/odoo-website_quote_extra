@@ -368,6 +368,7 @@
                   <strong data-id="total_amount">
                     <t t-esc="'%.0f' %quotation.order_line_monthly_untaxed" />
                     <t t-esc="quotation.currency_id.symbol" />
+                    / Månad
                   </strong>
                 </t>
                 <t t-if="product_uom_filter == 'normal'">
