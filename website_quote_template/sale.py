@@ -39,10 +39,10 @@ class sale_order_line(models.Model):
     @api.depends('product_id.lst_price', 'price_unit', 'discount')
     def _given_discount(self):
         if self.product_id.lst_price > 1: # not individual price
-            self.given_discount = (1 - self.discounted_price / self.price_unit) * 100
-            #~ self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
-            #~ if self.discount != 0:
-                #~ self.given_discount = (1- self.given_discount / 100) * self.discount
+            #~ self.given_discount = (1 - self.discounted_price / self.price_unit) * 100
+            self.given_discount = (1 - self.price_unit  / self.product_id.lst_price) * 100
+            if self.discount != 0:
+                self.given_discount = (1- self.given_discount / 100) * self.discount
     given_discount = fields.Float(compute='_given_discount')
 
     @api.multi
