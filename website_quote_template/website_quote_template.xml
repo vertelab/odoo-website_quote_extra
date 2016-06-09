@@ -322,7 +322,10 @@
                     <t t-esc="quotation.currency_id.symbol" />
                   </span>
                   <span t-if="line.given_discount or line.discount != 0">
+<!--
                     <t t-esc="'%.0d' %line.discounted_price if line.discounted_price != 0 else 0" />
+-->
+                    <t t-esc="'%.0d' %((1-line.given_discount / 100.0) * line.price_unit)" />
                     <t t-esc="quotation.currency_id.symbol" />
                   </span>
                   <t t-if="line.product_uom.category_id.id != 1">
