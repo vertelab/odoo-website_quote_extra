@@ -25,6 +25,7 @@
 'category': 'website',
 'description': """Creates web-pages for modules using description""",
 'author': 'Vertel AB',
+    'license': 'AGPL-3',
 'website': 'http://www.vertel.se',
 'depends': ['website'],
 'data': ['module_view.xml',

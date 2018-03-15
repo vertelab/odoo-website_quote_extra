@@ -25,6 +25,7 @@
 'category': 'website',
 'description': """Adds sequence to the quotation lines of the Online Proposals module.""",
 'author': 'Vertel AB',
+    'license': 'AGPL-3',
 'website': 'http://www.vertel.se',
 'depends': ['website_quote'],
 'data': ['website_quotation_backend.xml',

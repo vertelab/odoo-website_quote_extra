@@ -26,6 +26,7 @@
 'description': """Adds possibility to use other templates than website_quote.so_template. This module are not 
     useful without other modules that adds such templates.""",
 'author': 'Vertel AB',
+    'license': 'AGPL-3',
 'website': 'http://www.vertel.se',
 'depends': ['website_quote'],
 'data': ['website_quotation_backend.xml',

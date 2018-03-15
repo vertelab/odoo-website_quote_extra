@@ -12,6 +12,7 @@
     'category': 'other',
     'summary': 'Display leads on website',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['website_crm'],
     'data': ['website_lead.xml'],

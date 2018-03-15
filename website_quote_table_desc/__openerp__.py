@@ -12,6 +12,7 @@
     'category': 'other',
     'summary': 'Adds description and image to quotation table',
     'author': 'Vertel AB',
+    'license': 'AGPL-3',
     'website': 'http://www.vertel.se',
     'depends': ['website_quote', 'product'],
     'data': ['website_quotation_table.xml'],
